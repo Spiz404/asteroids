@@ -16,7 +16,6 @@ while True:
     screen.fill((0, 0, 0))
 
     starship.draw(screen)
-    pygame.draw.circle(screen, (255, 255, 255), starship.centroid, 1)
     for event in pygame.event.get():
         if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_q):
             pygame.quit()
