@@ -23,6 +23,9 @@ while True:
         if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_q):
             pygame.quit()
             exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                starship_shots.append(starship.shot())
 
     if pygame.key.get_pressed()[pygame.K_UP]:
         if not game_started: game_started = True
@@ -34,9 +37,6 @@ while True:
     if keys[pygame.K_RIGHT]:
         starship.rotate(ROTATION_SPEED)
 
-    if keys[pygame.K_SPACE]:
-        print("shooting")
-        starship_shots.append(starship.shot())
     if keys[pygame.K_UP]:
         speed = DEFAULT_SPEED
         rotation = starship.rotation_angle
