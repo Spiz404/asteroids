@@ -1,6 +1,7 @@
 import pygame
 import math
 from constants import STARSHIP_SIZE, SCREEN_WIDTH, SCREEN_HEIGHT, STARSHIP_COLOR
+from Shot import Shot
 
 class Starship:
     def __init__(self, rotation_angle, centroid):
@@ -33,3 +34,7 @@ class Starship:
         updated_centroid =  (self.centroid[0] + speed * math.cos(rotation), self.centroid[1] +  speed * math.sin(rotation))
         self.centroid = updated_centroid
         self.update_vertices()
+
+    # function that returns a new shot component
+    def shot(self):
+        return Shot(self.rotation_angle, self.centroid)

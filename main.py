@@ -10,11 +10,14 @@ game_started = False
 starship = Starship(0.5, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
 moving = False
 rotation = starship.rotation_angle
+starship_shots = []
 
 while True:
 
     screen.fill((0, 0, 0))
-
+    for shot in starship_shots:
+        shot.update_position()
+        shot.show(screen)
     starship.draw(screen)
     for event in pygame.event.get():
         if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_q):
@@ -31,6 +34,9 @@ while True:
     if keys[pygame.K_RIGHT]:
         starship.rotate(ROTATION_SPEED)
 
+    if keys[pygame.K_SPACE]:
+        print("shooting")
+        starship_shots.append(starship.shot())
     if keys[pygame.K_UP]:
         speed = DEFAULT_SPEED
         rotation = starship.rotation_angle
@@ -39,5 +45,6 @@ while True:
         if game_started:
             speed -= speed * 0.001
             starship.move(speed, rotation)
+
     pygame.display.update()
     pygame.display.flip()
