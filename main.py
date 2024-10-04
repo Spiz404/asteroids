@@ -16,7 +16,6 @@ while True:
 
     screen.fill((0, 0, 0))
     for i, [shot, time] in enumerate(starship_shots):
-        print(time)
         if time > SHOT_LIFE:
             starship_shots.remove([shot, time])
             continue
