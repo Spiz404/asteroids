@@ -1,7 +1,7 @@
 import pygame
 import math
 from starship import Starship
-from constants import DEFAULT_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT, ROTATION_SPEED, DAMPING
+from constants import DEFAULT_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT, ROTATION_SPEED, DAMPING, SHOT_LIFE
 
 screen = pygame.display.set_mode((SCREEN_WIDTH , SCREEN_HEIGHT))
 
@@ -15,9 +15,16 @@ starship_shots = []
 while True:
 
     screen.fill((0, 0, 0))
-    for shot in starship_shots:
+    for i, [shot, time] in enumerate(starship_shots):
+        print(time)
+        if time > SHOT_LIFE:
+            starship_shots.remove([shot, time])
+            continue
+
+        starship_shots[i] = [shot, time + 1]
         shot.update_position()
         shot.show(screen)
+
     starship.draw(screen)
     for event in pygame.event.get():
         if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_q):
@@ -25,7 +32,7 @@ while True:
             exit()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                starship_shots.append(starship.shot())
+                starship_shots.append([starship.shot(), 0])
 
     if pygame.key.get_pressed()[pygame.K_UP]:
         if not game_started: game_started = True
