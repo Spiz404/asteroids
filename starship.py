@@ -8,14 +8,8 @@ class Starship:
         self.centroid = centroid
         self.rotation_angle = -math.pi / 2
         x, y = self.centroid
-        angle = rotation_angle
-        vertices = []
-        for i in range(3):
-            vx = x + self.size * math.cos(angle)
-            vy = y + self.size * math.sin(angle)
-            vertices.append((vx, vy))
-            angle += 2 * math.pi / 3  # Rotate by 120 degrees (2π/3 radians)
-        self.vertices = vertices
+        self.vertices = []
+        self.update_vertices()
 
     def draw(self, screen):
         pygame.draw.polygon(screen, (255, 255, 255), self.vertices)
