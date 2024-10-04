@@ -15,7 +15,6 @@ class Starship:
         pygame.draw.polygon(screen, STARSHIP_COLOR, self.vertices, 1)
 
     def update_vertices(self):
-        print("updating vertices")
         x, y = self.centroid
         angle = self.rotation_angle
         vertices = []
@@ -30,10 +29,8 @@ class Starship:
        self.rotation_angle += rotation
        self.update_vertices()
 
-    def move(self, speed):
-        print("moving")
-        print(self.centroid)
-        updated_centroid =  (self.centroid[0] + speed * math.cos(self.rotation_angle), self.centroid[1] +  speed * math.sin(self.rotation_angle))
+    def move(self, speed, rotation):
+        updated_centroid =  (self.centroid[0] + speed * math.cos(rotation), self.centroid[1] +  speed * math.sin(rotation))
         self.centroid = updated_centroid
 
         print(self.centroid)

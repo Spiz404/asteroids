@@ -1,19 +1,19 @@
 import pygame
 import math
 from starship import Starship
-from constants import DEFAULT_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT
+from constants import DEFAULT_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT, ROTATION_SPEED, DAMPING
 
 screen = pygame.display.set_mode((SCREEN_WIDTH , SCREEN_HEIGHT))
 
 speed = DEFAULT_SPEED
-
+game_started = False
 starship = Starship(0.5, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
 moving = False
+rotation = starship.rotation_angle
+
 while True:
+
     screen.fill((0, 0, 0))
-    if speed < 0.1:
-        moving = False
-        speed = DEFAULT_SPEED
 
     starship.draw(screen)
     pygame.draw.circle(screen, (255, 255, 255), starship.centroid, 1)
@@ -23,17 +23,24 @@ while True:
             exit()
 
     if pygame.key.get_pressed()[pygame.K_UP]:
+        if not game_started: game_started = True
         #current_rotation = starship.direction
         moving = True
         #starship.move(starship.direction, speed)
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
-        starship.rotate(-0.004)
+        starship.rotate(ROTATION_SPEED * -1)
     if keys[pygame.K_RIGHT]:
-        starship.rotate(0.004)
+        starship.rotate(ROTATION_SPEED)
 
     if keys[pygame.K_UP]:
-        starship.move(0.5)
+        speed = DEFAULT_SPEED
+        rotation = starship.rotation_angle
+        starship.move(speed, rotation)
+    else:
+        if game_started:
+            speed -= speed * 0.001
+            starship.move(speed, rotation)
     pygame.display.update()
     pygame.display.flip()
