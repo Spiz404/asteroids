@@ -5,7 +5,7 @@ from constants import DEFAULT_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT
 
 screen = pygame.display.set_mode((SCREEN_WIDTH , SCREEN_HEIGHT))
 speed = DEFAULT_SPEED
-starship = Starship(1.0, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+starship = Starship(0.5, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
 moving = False
 while True:
     screen.fill((0, 0, 0))
