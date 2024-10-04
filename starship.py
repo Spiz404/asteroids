@@ -1,6 +1,6 @@
 import pygame
 import math
-from constants import STARSHIP_SIZE, SCREEN_WIDTH, SCREEN_HEIGHT
+from constants import STARSHIP_SIZE, SCREEN_WIDTH, SCREEN_HEIGHT, STARSHIP_COLOR
 
 class Starship:
     def __init__(self, rotation_angle, centroid):
@@ -12,7 +12,7 @@ class Starship:
         self.update_vertices()
 
     def draw(self, screen):
-        pygame.draw.polygon(screen, (255, 255, 255), self.vertices)
+        pygame.draw.polygon(screen, STARSHIP_COLOR, self.vertices)
 
     def update_vertices(self):
 
