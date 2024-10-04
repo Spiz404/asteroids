@@ -4,7 +4,9 @@ from starship import Starship
 from constants import DEFAULT_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT
 
 screen = pygame.display.set_mode((SCREEN_WIDTH , SCREEN_HEIGHT))
+
 speed = DEFAULT_SPEED
+
 starship = Starship(0.5, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
 moving = False
 while True:
@@ -12,7 +14,9 @@ while True:
     if speed < 0.1:
         moving = False
         speed = DEFAULT_SPEED
+
     starship.draw(screen)
+    pygame.draw.circle(screen, (255, 255, 255), starship.centroid, 1)
     for event in pygame.event.get():
         if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_q):
             pygame.quit()
@@ -28,8 +32,8 @@ while True:
         starship.rotate(-0.004)
     if keys[pygame.K_RIGHT]:
         starship.rotate(0.004)
-    if moving:
-        speed = math.log(speed, 2)
-        #starship.move(current_rotation, speed)
+
+    if keys[pygame.K_UP]:
+        starship.move(0.5)
     pygame.display.update()
     pygame.display.flip()

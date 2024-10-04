@@ -12,10 +12,10 @@ class Starship:
         self.update_vertices()
 
     def draw(self, screen):
-        pygame.draw.polygon(screen, STARSHIP_COLOR, self.vertices)
+        pygame.draw.polygon(screen, STARSHIP_COLOR, self.vertices, 1)
 
     def update_vertices(self):
-
+        print("updating vertices")
         x, y = self.centroid
         angle = self.rotation_angle
         vertices = []
@@ -30,25 +30,11 @@ class Starship:
        self.rotation_angle += rotation
        self.update_vertices()
 
-    def move(self, direction, speed):
+    def move(self, speed):
         print("moving")
-        print(self.vertices)
-        vertices_outside = 0
-        for i in range(3):
-            x, y = self.vertices[i]
-            x += speed * math.cos(direction)
-            y += speed * math.sin(direction)
-            if x > SCREEN_WIDTH or y > SCREEN_WIDTH or x < 0 or y < 0:
-                vertices_outside += 1
-            self.vertices[i] = (x, y)
+        print(self.centroid)
+        updated_centroid =  (self.centroid[0] + speed * math.cos(self.rotation_angle), self.centroid[1] +  speed * math.sin(self.rotation_angle))
+        self.centroid = updated_centroid
 
-        if vertices_outside == 3:
-            if self.vertices[0][0] > SCREEN_WIDTH:
-                self.vertices[0] = (0, self.vertices[0][1])
-                self.vertices[1] = (0, self.vertices[1][1])
-                self.vertices[2] = (0, self.vertices[2][1])
-            if self.vertices[0][1] > SCREEN_HEIGHT:
-                self.vertices[0] = (self.vertices[0][0], 0)
-                self.vertices[1] = (self.vertices[1][0], 0)
-                self.vertices[2] = (self.vertices[2][0], 0)
-        print(self.vertices)
+        print(self.centroid)
+        self.update_vertices()
