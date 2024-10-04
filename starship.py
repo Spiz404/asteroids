@@ -32,6 +32,4 @@ class Starship:
     def move(self, speed, rotation):
         updated_centroid =  (self.centroid[0] + speed * math.cos(rotation), self.centroid[1] +  speed * math.sin(rotation))
         self.centroid = updated_centroid
-
-        print(self.centroid)
         self.update_vertices()

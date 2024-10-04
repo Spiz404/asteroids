@@ -24,9 +24,7 @@ while True:
 
     if pygame.key.get_pressed()[pygame.K_UP]:
         if not game_started: game_started = True
-        #current_rotation = starship.direction
         moving = True
-        #starship.move(starship.direction, speed)
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
