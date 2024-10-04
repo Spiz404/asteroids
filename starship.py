@@ -13,7 +13,7 @@ class Starship:
         self.update_vertices()
 
     def draw(self, screen):
-        pygame.draw.polygon(screen, STARSHIP_COLOR, self.vertices, 1)
+        pygame.draw.polygon(screen, STARSHIP_COLOR, self.vertices)
 
     def update_vertices(self):
         x, y = self.centroid
