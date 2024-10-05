@@ -13,7 +13,7 @@ class Starship:
         self.update_vertices()
 
     def draw(self, screen):
-        pygame.draw.polygon(screen, STARSHIP_COLOR, self.vertices)
+        pygame.draw.polygon(screen, STARSHIP_COLOR, self.vertices, 1)
 
     def update_vertices(self):
         x, y = self.centroid
@@ -22,12 +22,9 @@ class Starship:
         outside_right = outside_left = outside_top = outside_down = 0
 
         for i in range(3):
-            if i == 0:
-                vx = x + (1.5* self.size * math.cos(angle))
-                vy = y + (1.5* self.size * math.sin(angle))
-            else:
-                vx = x + (self.size * math.cos(angle))
-                vy = y + (self.size * math.sin(angle))
+            m = 1.5 if i == 0 else 1
+            vx = x + (m * self.size * math.cos(angle))
+            vy = y + (m * self.size * math.sin(angle))
             if vx > SCREEN_WIDTH: outside_right += 1
             if vx < 0: outside_left += 1
             if vy < 0: outside_top += 1
@@ -53,4 +50,4 @@ class Starship:
 
     # function that returns a new shot component
     def shot(self):
-        return Shot(self.rotation_angle, self.centroid)
+        return Shot(self.rotation_angle, self.vertices[0])
