@@ -22,8 +22,12 @@ class Starship:
         outside_right = outside_left = outside_top = outside_down = 0
 
         for i in range(3):
-            vx = x + self.size * math.cos(angle)
-            vy = y + self.size * math.sin(angle)
+            if i == 0:
+                vx = x + (1.5* self.size * math.cos(angle))
+                vy = y + (1.5* self.size * math.sin(angle))
+            else:
+                vx = x + (self.size * math.cos(angle))
+                vy = y + (self.size * math.sin(angle))
             if vx > SCREEN_WIDTH: outside_right += 1
             if vx < 0: outside_left += 1
             if vy < 0: outside_top += 1
