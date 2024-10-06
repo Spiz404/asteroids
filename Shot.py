@@ -1,6 +1,6 @@
 import math
 import pygame
-from constants import SHOT_SPEED, SCREEN_HEIGHT, SCREEN_WIDTH
+from constants import SHOT_SPEED, SCREEN_HEIGHT, SCREEN_WIDTH, SHOT_SIZE, SHOT_COLOR
 class Shot:
     def __init__(self, direction, position):
         self.direction = direction
@@ -17,4 +17,4 @@ class Shot:
         self.position = (x, y)
 
     def show(self, screen):
-        pygame.draw.circle(screen, (255,255,255), self.position, 1)
+        pygame.draw.circle(screen, SHOT_COLOR, self.position, SHOT_SIZE, 0)
