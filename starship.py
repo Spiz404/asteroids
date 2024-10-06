@@ -1,13 +1,13 @@
 import pygame
 import math
-from constants import STARSHIP_SIZE, SCREEN_WIDTH, SCREEN_HEIGHT, STARSHIP_COLOR
+from constants import STARSHIP_SIZE, SCREEN_WIDTH, SCREEN_HEIGHT, STARSHIP_COLOR, STARTING_ROTATION_ANGLE
 from Shot import Shot
 
 class Starship:
     def __init__(self, rotation_angle, centroid):
         self.size = STARSHIP_SIZE
         self.centroid = centroid
-        self.rotation_angle = -math.pi / 2
+        self.rotation_angle = STARTING_ROTATION_ANGLE
         x, y = self.centroid
         self.vertices = []
         self.update_vertices()
