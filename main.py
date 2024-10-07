@@ -28,6 +28,7 @@ while True:
     while len(asteroids) < number_of_asteroids:
         #random_position = (random.randint(0, SCREEN_WIDTH), random.randint(0, SCREEN_HEIGHT))
         random_side = random.randint(0, 3)
+        random_position = (0, 0)
         match random_side:
             # up side
             case 0:
