@@ -1,8 +1,9 @@
 import pygame
 import math
 from starship import Starship
+from asteroid import Asteroid
 from constants import DEFAULT_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT, ROTATION_SPEED, DAMPING, SHOT_LIFE
-
+import random
 screen = pygame.display.set_mode((SCREEN_WIDTH , SCREEN_HEIGHT))
 
 speed = DEFAULT_SPEED
@@ -11,10 +12,30 @@ starship = Starship(0.5, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
 moving = False
 rotation = starship.rotation_angle
 starship_shots = []
+number_of_asteroids = 4
+asteroids = []
 
 while True:
 
     screen.fill((0, 0, 0))
+
+    if random.random() < 0.0004:
+        number_of_asteroids += 1
+        print(number_of_asteroids)
+
+    if len(asteroids) == 0: number_of_asteroids = 4
+
+    while len(asteroids) < number_of_asteroids:
+        random_position = (random.randint(0, SCREEN_WIDTH), random.randint(0, SCREEN_HEIGHT))
+        random_speed = random.uniform(0.1, 0.5)
+        direction = random.uniform(0, 2 * math.pi)
+        size = random.randint(0, 2)
+        asteroids.append(Asteroid(random_position, random_speed, direction, size))
+
+
+    for asteroid in asteroids:
+        asteroid.move()
+        asteroid.draw(screen)
     for i, [shot, time] in enumerate(starship_shots):
         if time > SHOT_LIFE:
             starship_shots.remove([shot, time])

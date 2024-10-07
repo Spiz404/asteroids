@@ -18,3 +18,6 @@ class Shot:
 
     def show(self, screen):
         pygame.draw.circle(screen, SHOT_COLOR, self.position, SHOT_SIZE, 0)
+
+    def split(self):
+        pass

@@ -3,7 +3,7 @@ import pygame
 import math
 
 class Asteroid:
-    def __init__(self, position, speed,direction, size):
+    def __init__(self, position, speed, direction, size):
         self.position = position
         self.speed = speed
         self.direction = direction
@@ -15,4 +15,17 @@ class Asteroid:
         pygame.draw.circle(screen, (255, 255, 255), self.position, self.size, 1)
 
     def move(self):
-       self.position = (self.position[0] + self.speed * math.cos(self.direction), self.position[1] + self.speed * math.sin(self.direction))
+        posx = self.position[0] + self.speed * math.cos(self.direction)
+        if posx > SCREEN_WIDTH:
+            posx = 0
+        if posx < 0:
+            posx = SCREEN_WIDTH
+        posy = self.position[1] + self.speed * math.sin(self.direction)
+
+        if posy > SCREEN_HEIGHT:
+            posy = 0
+
+        if posy < 0:
+            posy = SCREEN_HEIGHT
+
+        self.position = (posx, posy)
