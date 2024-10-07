@@ -38,7 +38,7 @@ class Asteroid:
         return False
 
     def split(self):
-        if self.size == 0:
+        if self.size_index == 0:
             return []
 
         direction1 = self.direction + math.pi / 4
