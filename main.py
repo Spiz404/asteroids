@@ -21,7 +21,6 @@ while True:
 
     if random.random() < 0.0004 and number_of_asteroids < MAX_ASTEROIDS:
         number_of_asteroids += 1
-        print(number_of_asteroids)
 
     if len(asteroids) == 0: number_of_asteroids = 4
 
@@ -43,10 +42,10 @@ while True:
             case 3:
                 random_position = (SCREEN_WIDTH + PADDING, random.random() * SCREEN_HEIGHT)
 
-        random_speed = random.uniform(0.1, 0.5)
+        #random_speed = random.uniform(0.1, 0.5)
         direction = random.uniform(0, 2 * math.pi)
         size = random.randint(0, 2)
-        asteroids.append(Asteroid(random_position, random_speed, direction, size))
+        asteroids.append(Asteroid(random_position, size, direction, size))
 
 
     for asteroid in asteroids:
