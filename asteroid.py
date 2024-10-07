@@ -16,16 +16,17 @@ class Asteroid:
 
     def move(self):
         posx = self.position[0] + self.speed * math.cos(self.direction)
-        if posx > SCREEN_WIDTH:
-            posx = 0
-        if posx < 0:
-            posx = SCREEN_WIDTH
+        if posx > SCREEN_WIDTH + self.size:
+            posx = - self.size
+
+        if posx < - self.size:
+            posx = SCREEN_WIDTH + self.size
         posy = self.position[1] + self.speed * math.sin(self.direction)
 
-        if posy > SCREEN_HEIGHT:
-            posy = 0
+        if posy > SCREEN_HEIGHT + self.size:
+            posy = -self.size
 
-        if posy < 0:
-            posy = SCREEN_HEIGHT
+        if posy < - self.size:
+            posy = SCREEN_HEIGHT + self.size
 
         self.position = (posx, posy)
