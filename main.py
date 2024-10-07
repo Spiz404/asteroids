@@ -52,16 +52,34 @@ while True:
     for asteroid in asteroids:
         asteroid.move()
         asteroid.draw(screen)
+
         if asteroid.check_collision(starship.centroid):
-            print("game over")
+            pygame.quit()
+            exit()
+
     for i, [shot, time] in enumerate(starship_shots):
         if time > SHOT_LIFE:
             starship_shots.remove([shot, time])
             continue
 
-        starship_shots[i] = [shot, time + 1]
-        shot.update_position()
-        shot.show(screen)
+        collided = False
+        # checking if one of the asteroid has been hit by the shot
+
+        # list that will contain the splited asteroids to add
+        toAdd = []
+        for asteroid in asteroids:
+            if asteroid.check_collision(shot.position):
+                toAdd += asteroid.split()
+                asteroids.remove(asteroid)
+                starship_shots.remove([shot, time])
+                collided = True
+                break
+
+        asteroids += toAdd
+        if not collided:
+            starship_shots[i] = [shot, time + 1]
+            shot.update_position()
+            shot.show(screen)
 
     starship.draw(screen)
     for event in pygame.event.get():
