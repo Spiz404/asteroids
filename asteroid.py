@@ -7,7 +7,7 @@ class Asteroid:
         self.position = position
         self.direction = direction
         self.size = ASTEROIDS_SIZES[size] if size < len(ASTEROIDS_SIZES) and size > 0 else ASTEROIDS_SIZES[-1]
-        self.speed = ASTEROIDS_SPEEDS[size]
+        self.speed = ASTEROIDS_SPEEDS[size] if size < len(ASTEROIDS_SPEEDS) and size > 0 else ASTEROIDS_SPEEDS[-1]
         self.vertices = []
 
 

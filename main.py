@@ -26,7 +26,23 @@ while True:
     if len(asteroids) == 0: number_of_asteroids = 4
 
     while len(asteroids) < number_of_asteroids:
-        random_position = (random.randint(0, SCREEN_WIDTH), random.randint(0, SCREEN_HEIGHT))
+        #random_position = (random.randint(0, SCREEN_WIDTH), random.randint(0, SCREEN_HEIGHT))
+        random_side = random.randint(0, 3)
+        match random_side:
+            # up side
+            case 0:
+               random_position = (random.random() * SCREEN_WIDTH, 0)
+            # down side
+            case 1:
+               random_position = (random.random() * SCREEN_WIDTH, SCREEN_HEIGHT)
+               break
+            # left side
+            case 2:
+                random_position = (0, random.random() * SCREEN_HEIGHT)
+            # right side
+            case 3:
+                random_position = (SCREEN_WIDTH, random.random() * SCREEN_HEIGHT)
+
         random_speed = random.uniform(0.1, 0.5)
         direction = random.uniform(0, 2 * math.pi)
         size = random.randint(0, 2)
