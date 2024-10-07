@@ -52,6 +52,8 @@ while True:
     for asteroid in asteroids:
         asteroid.move()
         asteroid.draw(screen)
+        if asteroid.check_collision(starship.centroid):
+            print("game over")
     for i, [shot, time] in enumerate(starship_shots):
         if time > SHOT_LIFE:
             starship_shots.remove([shot, time])

@@ -11,10 +11,10 @@ class Asteroid:
         self.vertices = []
 
 
-    def draw(self, screen):
+    def draw(self, screen) -> None:
         pygame.draw.circle(screen, (255, 255, 255), self.position, self.size)
 
-    def move(self):
+    def move(self) -> None:
         posx = self.position[0] + self.speed * math.cos(self.direction)
         if posx > SCREEN_WIDTH + self.size:
             posx = - self.size
@@ -30,3 +30,8 @@ class Asteroid:
             posy = SCREEN_HEIGHT + self.size
 
         self.position = (posx, posy)
+
+    def check_collision(self, starship_position) -> bool:
+        if math.sqrt((starship_position[0] - self.position[0]) ** 2 + (starship_position[1] - self.position[1]) ** 2) < self.size:
+            return True
+        return False
