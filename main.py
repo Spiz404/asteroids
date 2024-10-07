@@ -21,7 +21,6 @@ while True:
 
     if random.random() < 0.0004 and number_of_asteroids < MAX_ASTEROIDS:
         number_of_asteroids += 1
-        print(number_of_asteroids)
 
     if len(asteroids) == 0: number_of_asteroids = 4
 
@@ -43,25 +42,43 @@ while True:
             case 3:
                 random_position = (SCREEN_WIDTH + PADDING, random.random() * SCREEN_HEIGHT)
 
-        random_speed = random.uniform(0.1, 0.5)
+        #random_speed = random.uniform(0.1, 0.5)
         direction = random.uniform(0, 2 * math.pi)
         size = random.randint(0, 2)
-        asteroids.append(Asteroid(random_position, random_speed, direction, size))
+        asteroids.append(Asteroid(random_position, size, direction, size))
 
 
     for asteroid in asteroids:
         asteroid.move()
         asteroid.draw(screen)
+
         if asteroid.check_collision(starship.centroid):
-            print("game over")
+            pygame.quit()
+            exit()
+
     for i, [shot, time] in enumerate(starship_shots):
         if time > SHOT_LIFE:
             starship_shots.remove([shot, time])
             continue
 
-        starship_shots[i] = [shot, time + 1]
-        shot.update_position()
-        shot.show(screen)
+        collided = False
+        # checking if one of the asteroid has been hit by the shot
+
+        # list that will contain the splited asteroids to add
+        toAdd = []
+        for asteroid in asteroids:
+            if asteroid.check_collision(shot.position):
+                toAdd += asteroid.split()
+                asteroids.remove(asteroid)
+                starship_shots.remove([shot, time])
+                collided = True
+                break
+
+        asteroids += toAdd
+        if not collided:
+            starship_shots[i] = [shot, time + 1]
+            shot.update_position()
+            shot.show(screen)
 
     starship.draw(screen)
     for event in pygame.event.get():
